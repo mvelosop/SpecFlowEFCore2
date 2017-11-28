@@ -31,10 +31,10 @@ namespace Budget.Data.Config
             // 8-2. Configure tenant navigation and FK properties
             //---------------------------------------------------
 
-            //builder.HasOne<Tenant>(bc => bc.Tenant)
-            //    .WithMany()
-            //    .HasForeignKey(bc => bc.Tenant_Id)
-            //    .OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne<Tenant>(bc => bc.Tenant)
+                .WithMany()
+                .HasForeignKey(bc => bc.Tenant_Id)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Indexes
         }

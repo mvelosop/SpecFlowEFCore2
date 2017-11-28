@@ -12,9 +12,10 @@ using System;
 namespace Budget.Migrations
 {
     [DbContext(typeof(BudgetDbContext))]
-    partial class BudgetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171128195603_AddBudgetClassFKMigration_BudgetDbContext")]
+    partial class AddBudgetClassFKMigration_BudgetDbContext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

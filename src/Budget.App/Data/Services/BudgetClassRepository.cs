@@ -8,6 +8,7 @@
 //  Original author: Miguel
 //------------------------------------------------------------------------------
 
+using Budget.App;
 using Budget.Core.Model;
 using Domion.Data.Base;
 using Domion.Lib;
@@ -27,14 +28,14 @@ namespace Budget.Data.Services
         // 8-3. Inject SessionContext
         //-------------------------------
 
-        //private readonly SessionContext _sessionContext;
+        private readonly SessionContext _sessionContext;
 
         public BudgetClassRepository(
-            BudgetDbContext dbContext/*,
-            SessionContext sessionContext*/)
+            BudgetDbContext dbContext,
+            SessionContext sessionContext)
             : base(dbContext)
         {
-            //_sessionContext = sessionContext;
+            _sessionContext = sessionContext;
         }
 
         public new IQueryable<BudgetClass> Query(Expression<Func<BudgetClass, bool>> where = null)
@@ -42,9 +43,7 @@ namespace Budget.Data.Services
             // 8-4. Include SessionContext in query
             //-----------------------------------------
 
-            //return base.Query(where).Where(bc => bc.Tenant_Id == _sessionContext.CurrentTenant.Id);
-
-            return base.Query(where);
+            return base.Query(where).Where(bc => bc.Tenant_Id == _sessionContext.CurrentTenant.Id);
         }
 
         public new virtual async Task<int> SaveChangesAsync()
@@ -92,7 +91,7 @@ namespace Budget.Data.Services
             // 8-5. Include SessionContext on saving
             //--------------------------------------
 
-            //entity.Tenant_Id = _sessionContext.CurrentTenant.Id;
+            entity.Tenant_Id = _sessionContext.CurrentTenant.Id;
         }
 
         protected override async Task<List<ValidationResult>> ValidateDeleteAsync(BudgetClass entity)
