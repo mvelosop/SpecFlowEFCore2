@@ -34,16 +34,16 @@ namespace Budget.Specs.Bindings
         // 4-3. Dispose scope from scenario context
         //-----------------------------------------
 
-        //[AfterStep]
-        //public void AfterStep()
-        //{
-        //    if (_scenarioContext.TryGetValue(Startup.ScopeKey, out ILifetimeScope scope))
-        //    {
-        //        scope?.Dispose();
+        [AfterStep]
+        public void AfterStep()
+        {
+            if (_scenarioContext.TryGetValue(Startup.ScopeKey, out ILifetimeScope scope))
+            {
+                scope?.Dispose();
 
-        //        _scenarioContext.Remove(Startup.ScopeKey);
-        //    }
-        //}
+                _scenarioContext.Remove(Startup.ScopeKey);
+            }
+        }
 
         [BeforeScenario]
         public void BeforeScenario()
@@ -54,13 +54,13 @@ namespace Budget.Specs.Bindings
         // 4-2. Store scope in scenario context
         //-------------------------------------
 
-        //[BeforeStep]
-        //public void BeforeStep()
-        //{
-        //    ILifetimeScope scope = GetLifetimeScope();
+        [BeforeStep]
+        public void BeforeStep()
+        {
+            ILifetimeScope scope = GetLifetimeScope();
 
-        //    _scenarioContext.Set(scope, Startup.ScopeKey);
-        //}
+            _scenarioContext.Set(scope, Startup.ScopeKey);
+        }
 
         private ILifetimeScope GetLifetimeScope()
         {

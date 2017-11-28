@@ -32,21 +32,13 @@ namespace Budget.Specs.Bindings
         [Given(@"there are no BudgetClasses")]
         public async Task GivenThereAreNoBudgetClasses()
         {
-            using (var scope = GetScope())
-            {
-                var dbContext = scope.Resolve<BudgetDbContext>();
-
-                dbContext.RemoveRange(await dbContext.BudgetClasses.ToListAsync());
-                await dbContext.SaveChangesAsync();
-            }
-
             // 4-5. Refactor dependency resolution
             //------------------------------------
 
-            //var dbContext = Resolve<BudgetDbContext>();
+            var dbContext = Resolve<BudgetDbContext>();
 
-            //dbContext.RemoveRange(await dbContext.BudgetClasses.ToListAsync());
-            //await dbContext.SaveChangesAsync();
+            dbContext.RemoveRange(await dbContext.BudgetClasses.ToListAsync());
+            await dbContext.SaveChangesAsync();
         }
 
         // 3-2. Get budget classes step
@@ -55,23 +47,14 @@ namespace Budget.Specs.Bindings
         [Then(@"I get the following budget classes")]
         public async Task ThenIGetTheFollowingBudgetClasses(Table table)
         {
-            using (var scope = GetScope())
-            {
-                var services = scope.Resolve<BudgetClassServices>();
-
-                List<BudgetClass> result = await services.QueryBudgetClasses().ToListAsync();
-
-                table.CompareToSet(result);
-            }
-
             // 4-5. Refactor dependency resolution
             //------------------------------------
 
-            //var services = Resolve<BudgetClassServices>();
+            var services = Resolve<BudgetClassServices>();
 
-            //List<BudgetClass> result = await services.QueryBudgetClasses().ToListAsync();
+            List<BudgetClass> result = await services.QueryBudgetClasses().ToListAsync();
 
-            //table.CompareToSet(result);
+            table.CompareToSet(result);
         }
 
         // 3-3. Add budget classes step
@@ -82,29 +65,17 @@ namespace Budget.Specs.Bindings
         {
             var dataSet = table.CreateSet<BudgetClass>();
 
-            using (var scope = GetScope())
-            {
-                var services = scope.Resolve<BudgetClassServices>();
-
-                foreach (BudgetClass bc in dataSet)
-                {
-                    var errors = await services.AddBudgetClassAsync(bc);
-
-                    errors.Should().BeEmpty();
-                }
-            }
-
             // 4-5. Refactor dependency resolution
             //------------------------------------
 
-            //var services = Resolve<BudgetClassServices>();
+            var services = Resolve<BudgetClassServices>();
 
-            //foreach (BudgetClass bc in dataSet)
-            //{
-            //    var errors = await services.AddBudgetClassAsync(bc);
+            foreach (BudgetClass bc in dataSet)
+            {
+                var errors = await services.AddBudgetClassAsync(bc);
 
-            //    errors.Should().BeEmpty();
-            //}
+                errors.Should().BeEmpty();
+            }
 
         }
 
@@ -121,9 +92,9 @@ namespace Budget.Specs.Bindings
         // 4-4. Resolve dependency from current scope
         //-------------------------------------------
 
-        //private T Resolve<T>() where T : class
-        //{
-        //    return _scenarioContext.Get<ILifetimeScope>(Startup.ScopeKey)?.Resolve<T>();
-        //}
+        private T Resolve<T>() where T : class
+        {
+            return _scenarioContext.Get<ILifetimeScope>(Startup.ScopeKey)?.Resolve<T>();
+        }
     }
 }
