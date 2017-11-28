@@ -44,20 +44,20 @@ namespace Budget.Specs.Bindings
         // 5-2. Verify duplicate name step
         //--------------------------------
 
-        //[Then(@"I can't add another class ""(.*)""")]
-        //public async Task ThenICanTAddAnotherClass(string name)
-        //{
-        //    var services = Resolve<BudgetClassServices>();
+        [Then(@"I can't add another class ""(.*)""")]
+        public async Task ThenICanTAddAnotherClass(string name)
+        {
+            var services = Resolve<BudgetClassServices>();
 
-        //    var budgetClass = new BudgetClass
-        //    {
-        //        Name = name,
-        //    };
+            var budgetClass = new BudgetClass
+            {
+                Name = name,
+            };
 
-        //    var errors = await services.AddBudgetClassAsync(budgetClass);
+            var errors = await services.AddBudgetClassAsync(budgetClass);
 
-        //    errors.Should().ContainErrorMessage(BudgetClassRepository.DuplicateByNameError);
-        //}
+            errors.Should().ContainErrorMessage(BudgetClassRepository.DuplicateByNameError);
+        }
 
         // 3-2. Get budget classes step
         //-----------------------------
@@ -78,20 +78,20 @@ namespace Budget.Specs.Bindings
         // 5-1. Add budget class step
         //---------------------------
 
-        //[When(@"I add budget class ""(.*)""")]
-        //public async Task WhenIAddBudgetClass(string name)
-        //{
-        //    var services = Resolve<BudgetClassServices>();
+        [When(@"I add budget class ""(.*)""")]
+        public async Task WhenIAddBudgetClass(string name)
+        {
+            var services = Resolve<BudgetClassServices>();
 
-        //    var budgetClass = new BudgetClass
-        //    {
-        //        Name = name,
-        //    };
+            var budgetClass = new BudgetClass
+            {
+                Name = name,
+            };
 
-        //    var errors = await services.AddBudgetClassAsync(budgetClass);
+            var errors = await services.AddBudgetClassAsync(budgetClass);
 
-        //    errors.Should().BeEmpty();
-        //}
+            errors.Should().BeEmpty();
+        }
 
         // 3-3. Add budget classes step
         //-----------------------------
