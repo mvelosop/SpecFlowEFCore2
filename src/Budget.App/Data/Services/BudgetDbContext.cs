@@ -37,6 +37,10 @@ namespace Budget.Data.Services
         /// <param name="modelBuilder"></param>
         private void ConfigureExternalModel(ModelBuilder modelBuilder)
         {
+            // 6-3. Add tenant configuration
+            //------------------------------
+
+            modelBuilder.AddConfiguration(new TenantConfiguration());
         }
 
         ///
