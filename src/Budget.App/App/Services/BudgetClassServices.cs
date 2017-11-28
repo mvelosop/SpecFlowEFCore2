@@ -33,11 +33,11 @@ namespace Budget.App.Services
             // 3-4. Save to repo
             //------------------
 
-            //List<ValidationResult> errors = await BudgetClassRepo.TryInsertAsync(entity);
+            List<ValidationResult> errors = await BudgetClassRepo.TryInsertAsync(entity);
 
-            //if (errors.Any()) return errors;
+            if (errors.Any()) return errors;
 
-            //await BudgetClassRepo.SaveChangesAsync();
+            await BudgetClassRepo.SaveChangesAsync();
 
             return Errors.NoError;
         }
@@ -47,9 +47,7 @@ namespace Budget.App.Services
             // 3-5. Get data from repo
             //------------------------
 
-            //return BudgetClassRepo.Query(where);
-
-            return Enumerable.Empty<BudgetClass>().AsAsyncQueryable();
+            return BudgetClassRepo.Query(where);
         }
     }
 
