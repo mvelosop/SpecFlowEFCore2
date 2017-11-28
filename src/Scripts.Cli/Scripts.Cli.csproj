@@ -21,6 +21,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\lib\Domion.Data\Domion.Data.csproj" />
+	  <ProjectReference Include="..\Budget.App\Budget.App.csproj" />
 	</ItemGroup>
 
 </Project>
