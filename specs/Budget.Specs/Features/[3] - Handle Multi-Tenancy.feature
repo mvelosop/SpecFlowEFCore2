@@ -3,6 +3,11 @@
     I need to handle multi-tenancy
     To optimize resource usage
 
+Background: 
+
+    Given there are no BudgetClasses
+
+
 Scenario: Scenario - 3.1 - Allow same budget classes for different tenants
 
     Given I have a new tenant "Multi-Tenant A"

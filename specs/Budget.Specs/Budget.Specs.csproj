@@ -207,6 +207,9 @@
       <LastGenOutput>[3] - Handle Multi-Tenancy.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
+    <None Include="xunit.runner.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\lib\Domion.Testing\Domion.Testing.csproj">

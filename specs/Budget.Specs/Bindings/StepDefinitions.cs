@@ -44,30 +44,30 @@ namespace Budget.Specs.Bindings
         // 7-3. Add budget classes to tenant step
         //---------------------------------------
 
-        //[Given(@"I have the following budget class for ""(.*)"":")]
-        //[Then(@"I can also have the following budget class for ""(.*)"":")]
-        //public async Task GivenIHaveTheFollowingBudgetClassFor(string name, Table table)
-        //{
-        //    var tenantServices = Resolve<TenantServices>();
+        [Given(@"I have the following budget class for ""(.*)"":")]
+        [Then(@"I can also have the following budget class for ""(.*)"":")]
+        public async Task GivenIHaveTheFollowingBudgetClassFor(string name, Table table)
+        {
+            var tenantServices = Resolve<TenantServices>();
 
-        //    var currentTenant = await tenantServices.FindTenantByNameAsync(name);
+            var currentTenant = await tenantServices.FindTenantByNameAsync(name);
 
-        //    var sessionContext = new SessionContext(currentTenant);
+            var sessionContext = new SessionContext(currentTenant);
 
-        //    using (var scope = GetContainer().BeginLifetimeScope(builder => builder.Register(c => sessionContext)))
-        //    {
-        //        var dataSet = table.CreateSet<BudgetClass>();
+            using (var scope = GetContainer().BeginLifetimeScope(builder => builder.Register(c => sessionContext)))
+            {
+                var dataSet = table.CreateSet<BudgetClass>();
 
-        //        var budgetClassServices = scope.Resolve<BudgetClassServices>();
+                var budgetClassServices = scope.Resolve<BudgetClassServices>();
 
-        //        foreach (BudgetClass bc in dataSet)
-        //        {
-        //            var errors = await budgetClassServices.AddBudgetClassAsync(bc);
+                foreach (BudgetClass bc in dataSet)
+                {
+                    var errors = await budgetClassServices.AddBudgetClassAsync(bc);
 
-        //            errors.Should().BeEmpty();
-        //        }
-        //    }
-        //}
+                    errors.Should().BeEmpty();
+                }
+            }
+        }
 
         // 5-2. Verify duplicate name step
         //--------------------------------

@@ -67,6 +67,14 @@ namespace Budget.Specs.Features
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 6
+#line 8
+    testRunner.Given("there are no BudgetClasses", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+        }
+        
         void System.IDisposable.Dispose()
         {
             this.ScenarioTearDown();
@@ -78,9 +86,11 @@ namespace Budget.Specs.Features
         public virtual void Scenario_3_1_AllowSameBudgetClassesForDifferentTenants()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Scenario - 3.1 - Allow same budget classes for different tenants", ((string[])(null)));
-#line 6
+#line 11
 this.ScenarioSetup(scenarioInfo);
-#line 8
+#line 6
+this.FeatureBackground();
+#line 13
     testRunner.Given("I have a new tenant \"Multi-Tenant A\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -95,9 +105,9 @@ this.ScenarioSetup(scenarioInfo);
                         "Bduget Class B",
                         "2",
                         "Expense"});
-#line 10
-    testRunner.And("I have the following budget class for \"Multi-Tenant A\":", ((string)(null)), table1, "And ");
 #line 15
+    testRunner.And("I have the following budget class for \"Multi-Tenant A\":", ((string)(null)), table1, "And ");
+#line 20
     testRunner.When("I have a new tenant \"Multi-Tenant B\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -112,7 +122,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Bduget Class B",
                         "2",
                         "Expense"});
-#line 17
+#line 22
     testRunner.Then("I can also have the following budget class for \"Multi-Tenant B\":", ((string)(null)), table2, "Then ");
 #line hidden
             this.ScenarioCleanup();
