@@ -68,11 +68,11 @@ namespace Budget.Specs.Bindings
             // 9-1. Register session context in scope
             //---------------------------------------
 
-            //if (_scenarioContext.TryGetValue(nameof(SessionContext), out SessionContext sessionContext))
-            //{
-            //    return _scenarioContext.Get<IContainer>(Startup.ContainerKey).BeginLifetimeScope(
-            //        builder => builder.Register(c => sessionContext));
-            //}
+            if (_scenarioContext.TryGetValue(nameof(SessionContext), out SessionContext sessionContext))
+            {
+                return _scenarioContext.Get<IContainer>(Startup.ContainerKey).BeginLifetimeScope(
+                    builder => builder.Register(c => sessionContext));
+            }
 
             return _scenarioContext.Get<IContainer>(Startup.ContainerKey).BeginLifetimeScope();
         }

@@ -30,16 +30,16 @@ namespace Budget.Specs.Bindings
         // 9-2. Create Scenario tenant context
         //------------------------------------
 
-        //[Given(@"I'm working in a new scenario tenant context")]
-        //public async Task GivenImWorkingInANewScenarioTenantContext()
-        //{
-        //    // Get scenario name
-        //    var scenarioName = _scenarioContext.ScenarioInfo.Title;
+        [Given(@"I'm working in a new scenario tenant context")]
+        public async Task GivenImWorkingInANewScenarioTenantContext()
+        {
+            // Get scenario name
+            var scenarioName = _scenarioContext.ScenarioInfo.Title;
 
-        //    var sessionContext = await GetSessionContext(scenarioName);
+            var sessionContext = await GetSessionContext(scenarioName);
 
-        //    _scenarioContext.Set(sessionContext, nameof(SessionContext));
-        //}
+            _scenarioContext.Set(sessionContext, nameof(SessionContext));
+        }
 
         // 4-1. Clear data step
         //---------------------
@@ -170,30 +170,30 @@ namespace Budget.Specs.Bindings
         // 9-3. Create tenant context for session
         //---------------------------------------
 
-        //private async Task<SessionContext> GetSessionContext(string scenarioName)
-        //{
-        //    var services = Resolve<TenantServices>();
+        private async Task<SessionContext> GetSessionContext(string scenarioName)
+        {
+            var services = Resolve<TenantServices>();
 
-        //    var tenant = await services.FindTenantByNameAsync(scenarioName);
+            var tenant = await services.FindTenantByNameAsync(scenarioName);
 
-        //    if (tenant != null)
-        //    {
-        //        var dbContext = Resolve<BudgetDbContext>();
+            if (tenant != null)
+            {
+                var dbContext = Resolve<BudgetDbContext>();
 
-        //        dbContext.RemoveRange(await dbContext.BudgetClasses.Where(bc => bc.Tenant_Id == tenant.Id).ToListAsync());
-        //        await dbContext.SaveChangesAsync();
+                dbContext.RemoveRange(await dbContext.BudgetClasses.Where(bc => bc.Tenant_Id == tenant.Id).ToListAsync());
+                await dbContext.SaveChangesAsync();
 
-        //        await services.RemoveTenantAsync(tenant);
-        //    }
+                await services.RemoveTenantAsync(tenant);
+            }
 
-        //    tenant = new Tenant { Name = scenarioName };
+            tenant = new Tenant { Name = scenarioName };
 
-        //    var errors = await services.AddTenantAsync(tenant);
+            var errors = await services.AddTenantAsync(tenant);
 
-        //    errors.Should().BeEmpty();
+            errors.Should().BeEmpty();
 
-        //    return new SessionContext(tenant);
-        //}
+            return new SessionContext(tenant);
+        }
 
         // 4-4. Resolve dependency from current scope
         //-------------------------------------------
