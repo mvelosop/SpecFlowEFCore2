@@ -148,6 +148,27 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
+        [Xunit.TheoryAttribute(DisplayName="Scenario - 1.2 - Avoid duplicate budget class name")]
+        [Xunit.TraitAttribute("FeatureTitle", "Feature - 1 - ManageBudgetClasses")]
+        [Xunit.TraitAttribute("Description", "Scenario - 1.2 - Avoid duplicate budget class name")]
+        [Xunit.InlineDataAttribute("Income", new string[0])]
+        [Xunit.InlineDataAttribute("Housing", new string[0])]
+        [Xunit.InlineDataAttribute("Food", new string[0])]
+        public virtual void Scenario_1_2_AvoidDuplicateBudgetClassName(string name, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Scenario - 1.2 - Avoid duplicate budget class name", exampleTags);
+#line 30
+this.ScenarioSetup(scenarioInfo);
+#line 6
+this.FeatureBackground();
+#line 32
+    testRunner.When(string.Format("I add budget class \"{0}\"", name), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 33
+    testRunner.Then(string.Format("I can\'t add another class \"{0}\"", name), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
         [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.2.0.0")]
         [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
         public class FixtureData : System.IDisposable

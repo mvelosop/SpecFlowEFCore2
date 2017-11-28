@@ -26,3 +26,15 @@ Scenario: Scenario - 1.1 - Add budget classes
         | Transportation | 4         | Expense         |
         | Entertainment  | 5         | Expense         |
 
+
+Scenario Outline: Scenario - 1.2 - Avoid duplicate budget class name
+
+    When I add budget class "<Name>"
+    Then I can't add another class "<Name>"
+
+    Examples: 
+        | Name    |
+        | Income  |
+        | Housing |
+        | Food    |
+

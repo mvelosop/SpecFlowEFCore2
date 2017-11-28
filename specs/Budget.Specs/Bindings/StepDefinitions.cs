@@ -41,6 +41,24 @@ namespace Budget.Specs.Bindings
             await dbContext.SaveChangesAsync();
         }
 
+        // 5-2. Verify duplicate name step
+        //--------------------------------
+
+        //[Then(@"I can't add another class ""(.*)""")]
+        //public async Task ThenICanTAddAnotherClass(string name)
+        //{
+        //    var services = Resolve<BudgetClassServices>();
+
+        //    var budgetClass = new BudgetClass
+        //    {
+        //        Name = name,
+        //    };
+
+        //    var errors = await services.AddBudgetClassAsync(budgetClass);
+
+        //    errors.Should().ContainErrorMessage(BudgetClassRepository.DuplicateByNameError);
+        //}
+
         // 3-2. Get budget classes step
         //-----------------------------
 
@@ -56,6 +74,24 @@ namespace Budget.Specs.Bindings
 
             table.CompareToSet(result);
         }
+
+        // 5-1. Add budget class step
+        //---------------------------
+
+        //[When(@"I add budget class ""(.*)""")]
+        //public async Task WhenIAddBudgetClass(string name)
+        //{
+        //    var services = Resolve<BudgetClassServices>();
+
+        //    var budgetClass = new BudgetClass
+        //    {
+        //        Name = name,
+        //    };
+
+        //    var errors = await services.AddBudgetClassAsync(budgetClass);
+
+        //    errors.Should().BeEmpty();
+        //}
 
         // 3-3. Add budget classes step
         //-----------------------------

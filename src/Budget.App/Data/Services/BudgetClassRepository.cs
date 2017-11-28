@@ -86,6 +86,16 @@ namespace Budget.Data.Services
         /// <inheritdoc />
         protected override async Task<List<ValidationResult>> ValidateSaveAsync(BudgetClass entity)
         {
+            // 5-3. Validate name duplication
+            //-------------------------------
+
+            //BudgetClass duplicateByName = await this.FindDuplicateByNameAsync(entity);
+
+            //if (duplicateByName != null)
+            //{
+            //    return Errors.ErrorList(DuplicateByNameError, new object[] { duplicateByName.Name, duplicateByName.Id }, new[] { "Name" });
+            //}
+
             return Errors.NoError;
         }
 
