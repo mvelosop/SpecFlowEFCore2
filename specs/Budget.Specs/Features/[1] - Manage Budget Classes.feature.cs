@@ -71,7 +71,7 @@ namespace Budget.Specs.Features
         {
 #line 6
 #line 8
-    testRunner.Given("there are no BudgetClasses", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("I\'m working in a new scenario tenant context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
         }
         

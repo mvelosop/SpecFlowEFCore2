@@ -128,6 +128,13 @@ namespace Budget.Specs.Bindings
 
             if (tenant == null) return;
 
+            // 9-4. Fix to properly clean previous state
+            //------------------------------------------
+
+            var dbContext = Resolve<BudgetDbContext>();
+            dbContext.RemoveRange(await dbContext.BudgetClasses.Where(bc => bc.Tenant_Id == tenant.Id).ToListAsync());
+            await dbContext.SaveChangesAsync();
+            
             var errors = await services.RemoveTenantAsync(tenant);
 
             errors.Should().BeEmpty();

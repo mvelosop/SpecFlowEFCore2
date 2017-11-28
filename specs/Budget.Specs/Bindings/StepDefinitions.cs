@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Budget.App;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
+using System.Linq;
 
 namespace Budget.Specs.Bindings
 {
@@ -25,6 +26,20 @@ namespace Budget.Specs.Bindings
         {
             _scenarioContext = scenarioContext;
         }
+
+        // 9-2. Create Scenario tenant context
+        //------------------------------------
+
+        //[Given(@"I'm working in a new scenario tenant context")]
+        //public async Task GivenImWorkingInANewScenarioTenantContext()
+        //{
+        //    // Get scenario name
+        //    var scenarioName = _scenarioContext.ScenarioInfo.Title;
+
+        //    var sessionContext = await GetSessionContext(scenarioName);
+
+        //    _scenarioContext.Set(sessionContext, nameof(SessionContext));
+        //}
 
         // 4-1. Clear data step
         //---------------------
@@ -140,7 +155,6 @@ namespace Budget.Specs.Bindings
 
                 errors.Should().BeEmpty();
             }
-
         }
 
         private IContainer GetContainer()
@@ -152,6 +166,34 @@ namespace Budget.Specs.Bindings
         {
             return GetContainer().BeginLifetimeScope();
         }
+
+        // 9-3. Create tenant context for session
+        //---------------------------------------
+
+        //private async Task<SessionContext> GetSessionContext(string scenarioName)
+        //{
+        //    var services = Resolve<TenantServices>();
+
+        //    var tenant = await services.FindTenantByNameAsync(scenarioName);
+
+        //    if (tenant != null)
+        //    {
+        //        var dbContext = Resolve<BudgetDbContext>();
+
+        //        dbContext.RemoveRange(await dbContext.BudgetClasses.Where(bc => bc.Tenant_Id == tenant.Id).ToListAsync());
+        //        await dbContext.SaveChangesAsync();
+
+        //        await services.RemoveTenantAsync(tenant);
+        //    }
+
+        //    tenant = new Tenant { Name = scenarioName };
+
+        //    var errors = await services.AddTenantAsync(tenant);
+
+        //    errors.Should().BeEmpty();
+
+        //    return new SessionContext(tenant);
+        //}
 
         // 4-4. Resolve dependency from current scope
         //-------------------------------------------

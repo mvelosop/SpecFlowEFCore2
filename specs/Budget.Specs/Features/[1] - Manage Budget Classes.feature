@@ -5,7 +5,7 @@
 
 Background: 
 
-    Given there are no BudgetClasses
+    Given I'm working in a new scenario tenant context
 
 
 Scenario: Scenario - 1.1 - Add budget classes
