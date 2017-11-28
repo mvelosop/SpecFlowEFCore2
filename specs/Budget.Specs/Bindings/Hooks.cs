@@ -31,11 +31,36 @@ namespace Budget.Specs.Bindings
             //TODO: implement logic that has to run before executing each scenario
         }
 
+        // 4-3. Dispose scope from scenario context
+        //-----------------------------------------
+
+        //[AfterStep]
+        //public void AfterStep()
+        //{
+        //    if (_scenarioContext.TryGetValue(Startup.ScopeKey, out ILifetimeScope scope))
+        //    {
+        //        scope?.Dispose();
+
+        //        _scenarioContext.Remove(Startup.ScopeKey);
+        //    }
+        //}
+
         [BeforeScenario]
         public void BeforeScenario()
         {
             _scenarioContext.Set(_container, Startup.ContainerKey);
         }
+
+        // 4-2. Store scope in scenario context
+        //-------------------------------------
+
+        //[BeforeStep]
+        //public void BeforeStep()
+        //{
+        //    ILifetimeScope scope = GetLifetimeScope();
+
+        //    _scenarioContext.Set(scope, Startup.ScopeKey);
+        //}
 
         private ILifetimeScope GetLifetimeScope()
         {

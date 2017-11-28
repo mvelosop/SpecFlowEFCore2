@@ -39,6 +39,14 @@ namespace Budget.Specs.Bindings
                 dbContext.RemoveRange(await dbContext.BudgetClasses.ToListAsync());
                 await dbContext.SaveChangesAsync();
             }
+
+            // 4-5. Refactor dependency resolution
+            //------------------------------------
+
+            //var dbContext = Resolve<BudgetDbContext>();
+
+            //dbContext.RemoveRange(await dbContext.BudgetClasses.ToListAsync());
+            //await dbContext.SaveChangesAsync();
         }
 
         // 3-2. Get budget classes step
@@ -55,6 +63,15 @@ namespace Budget.Specs.Bindings
 
                 table.CompareToSet(result);
             }
+
+            // 4-5. Refactor dependency resolution
+            //------------------------------------
+
+            //var services = Resolve<BudgetClassServices>();
+
+            //List<BudgetClass> result = await services.QueryBudgetClasses().ToListAsync();
+
+            //table.CompareToSet(result);
         }
 
         // 3-3. Add budget classes step
@@ -76,6 +93,19 @@ namespace Budget.Specs.Bindings
                     errors.Should().BeEmpty();
                 }
             }
+
+            // 4-5. Refactor dependency resolution
+            //------------------------------------
+
+            //var services = Resolve<BudgetClassServices>();
+
+            //foreach (BudgetClass bc in dataSet)
+            //{
+            //    var errors = await services.AddBudgetClassAsync(bc);
+
+            //    errors.Should().BeEmpty();
+            //}
+
         }
 
         private IContainer GetContainer()
@@ -87,5 +117,13 @@ namespace Budget.Specs.Bindings
         {
             return GetContainer().BeginLifetimeScope();
         }
+
+        // 4-4. Resolve dependency from current scope
+        //-------------------------------------------
+
+        //private T Resolve<T>() where T : class
+        //{
+        //    return _scenarioContext.Get<ILifetimeScope>(Startup.ScopeKey)?.Resolve<T>();
+        //}
     }
 }
