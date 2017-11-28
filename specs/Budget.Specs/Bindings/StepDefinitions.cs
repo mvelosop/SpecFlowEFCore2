@@ -19,11 +19,17 @@ namespace Budget.Specs.Bindings
     {
         // For additional details on SpecFlow step definitions see http://go.specflow.org/doc-stepdef
 
+        // 10-1. Inject FeatureContext
+        //----------------------------
+
+        private readonly FeatureContext _featureContext;
         private readonly ScenarioContext _scenarioContext;
 
         public StepDefinitions(
+            FeatureContext featureContext,
             ScenarioContext scenarioContext)
         {
+            _featureContext = featureContext;
             _scenarioContext = scenarioContext;
         }
 
@@ -176,21 +182,30 @@ namespace Budget.Specs.Bindings
 
             var tenant = await services.FindTenantByNameAsync(scenarioName);
 
-            if (tenant != null)
+            // 10-2. Reset tenant data just once per scenario
+            //-----------------------------------------------
+
+            if (!_featureContext.ContainsKey(scenarioName))
             {
-                var dbContext = Resolve<BudgetDbContext>();
+                _featureContext.Set(true, scenarioName);
 
-                dbContext.RemoveRange(await dbContext.BudgetClasses.Where(bc => bc.Tenant_Id == tenant.Id).ToListAsync());
-                await dbContext.SaveChangesAsync();
+                if (tenant != null)
+                {
+                    var dbContext = Resolve<BudgetDbContext>();
 
-                await services.RemoveTenantAsync(tenant);
+                    dbContext.RemoveRange(await dbContext.BudgetClasses.Where(bc => bc.Tenant_Id == tenant.Id).ToListAsync());
+                    await dbContext.SaveChangesAsync();
+
+                    await services.RemoveTenantAsync(tenant);
+                }
+
+                tenant = new Tenant { Name = scenarioName };
+
+                var errors = await services.AddTenantAsync(tenant);
+
+                errors.Should().BeEmpty();
+
             }
-
-            tenant = new Tenant { Name = scenarioName };
-
-            var errors = await services.AddTenantAsync(tenant);
-
-            errors.Should().BeEmpty();
 
             return new SessionContext(tenant);
         }
