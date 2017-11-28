@@ -95,6 +95,17 @@ namespace Budget.Specs.Bindings
             }
         }
 
+        // 7-2. Add new tenant step
+        //-------------------------
+
+        //[When(@"I have a new tenant ""(.*)""")]
+        //[Given(@"I have a new tenant ""(.*)""")]
+        //public async Task WhenIHaveANewTenant(string name)
+        //{
+        //    await EnsureTenantDoesNotExist(name);
+        //    await AddTenant(name);
+        //}
+
         private async Task AddTenant(string name)
         {
             var services = Resolve<TenantServices>();

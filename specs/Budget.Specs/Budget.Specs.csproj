@@ -181,6 +181,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>[2] - Manage Tenants.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\[3] - Handle Multi-Tenancy.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>[3] - Handle Multi-Tenancy.feature</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -196,6 +201,10 @@
     <None Include="Features\[2] - Manage Tenants.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>[2] - Manage Tenants.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\[3] - Handle Multi-Tenancy.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>[3] - Handle Multi-Tenancy.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
