@@ -24,14 +24,26 @@ namespace Budget.Data.Services
     {
         public static readonly string DuplicateByNameError = @"There's another BudgetClass with Name ""{0}"", can't duplicate! (Id={1})";
 
-        /// <inheritdoc />
-        public BudgetClassRepository(BudgetDbContext dbContext)
+        // 8-3. Inject SessionContext
+        //-------------------------------
+
+        //private readonly SessionContext _sessionContext;
+
+        public BudgetClassRepository(
+            BudgetDbContext dbContext/*,
+            SessionContext sessionContext*/)
             : base(dbContext)
         {
+            //_sessionContext = sessionContext;
         }
 
         public new IQueryable<BudgetClass> Query(Expression<Func<BudgetClass, bool>> where = null)
         {
+            // 8-4. Include SessionContext in query
+            //-----------------------------------------
+
+            //return base.Query(where).Where(bc => bc.Tenant_Id == _sessionContext.CurrentTenant.Id);
+
             return base.Query(where);
         }
 
@@ -76,6 +88,11 @@ namespace Budget.Data.Services
         internal virtual void CommonSaveOperations(BudgetClass entity)
         {
             TrimStrings(entity);
+
+            // 8-5. Include SessionContext on saving
+            //--------------------------------------
+
+            //entity.Tenant_Id = _sessionContext.CurrentTenant.Id;
         }
 
         protected override async Task<List<ValidationResult>> ValidateDeleteAsync(BudgetClass entity)

@@ -27,6 +27,13 @@ namespace Budget.Core.Model
 
         public virtual int SortOrder { get; set; }
 
+        // 8-1. Add tenant reference
+        //--------------------------
+
+        //public virtual Tenant Tenant { get; set; }
+
+        //public virtual int Tenant_Id { get; set; }
+
         public virtual TransactionType TransactionType { get; set; } = TransactionType.Income;
     }
 }

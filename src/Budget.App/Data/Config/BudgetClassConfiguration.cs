@@ -28,6 +28,14 @@ namespace Budget.Data.Config
 
             // External entities
 
+            // 8-2. Configure tenant navigation and FK properties
+            //---------------------------------------------------
+
+            //builder.HasOne<Tenant>(bc => bc.Tenant)
+            //    .WithMany()
+            //    .HasForeignKey(bc => bc.Tenant_Id)
+            //    .OnDelete(DeleteBehavior.Restrict);
+
             // Indexes
         }
     }
