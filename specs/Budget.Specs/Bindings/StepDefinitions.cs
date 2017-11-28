@@ -26,6 +26,21 @@ namespace Budget.Specs.Bindings
             _scenarioContext = scenarioContext;
         }
 
+        // 4-1. Clear data step
+        //---------------------
+
+        //[Given(@"there are no BudgetClasses")]
+        //public async Task GivenThereAreNoBudgetClasses()
+        //{
+        //    using (var scope = GetScope())
+        //    {
+        //        var dbContext = scope.Resolve<BudgetDbContext>();
+
+        //        dbContext.RemoveRange(await dbContext.BudgetClasses.ToListAsync());
+        //        await dbContext.SaveChangesAsync();
+        //    }
+        //}
+
         // 3-2. Get budget classes step
         //-----------------------------
 

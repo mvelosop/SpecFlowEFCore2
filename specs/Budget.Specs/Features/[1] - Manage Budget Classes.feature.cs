@@ -67,6 +67,14 @@ namespace Budget.Specs.Features
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 6
+#line 8
+    testRunner.Given("there are no BudgetClasses", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+        }
+        
         void System.IDisposable.Dispose()
         {
             this.ScenarioTearDown();
@@ -78,8 +86,10 @@ namespace Budget.Specs.Features
         public virtual void Scenario_1_1_AddBudgetClasses()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Scenario - 1.1 - Add budget classes", ((string[])(null)));
-#line 6
+#line 11
 this.ScenarioSetup(scenarioInfo);
+#line 6
+this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Name",
@@ -105,7 +115,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Entertainment",
                         "5",
                         "Expense"});
-#line 8
+#line 13
     testRunner.When("I add budget classes:", ((string)(null)), table1, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -132,7 +142,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Entertainment",
                         "5",
                         "Expense"});
-#line 16
+#line 21
     testRunner.Then("I get the following budget classes", ((string)(null)), table2, "Then ");
 #line hidden
             this.ScenarioCleanup();

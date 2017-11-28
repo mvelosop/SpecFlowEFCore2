@@ -3,6 +3,11 @@
     I need to manage budget classes
     To keep control of my budget
 
+Background: 
+
+    Given there are no BudgetClasses
+
+
 Scenario: Scenario - 1.1 - Add budget classes
 
     When I add budget classes:
