@@ -7,15 +7,15 @@ namespace Scripts.Cli
     // 1-1. Add DbContext factory
     //---------------------------
 
-    //public class BudgetDbContextDesignTimeFactory : IDesignTimeDbContextFactory<BudgetDbContext>
-    //{
-    //    public BudgetDbContext CreateDbContext(string[] args)
-    //    {
-    //        var builder = new DbContextOptionsBuilder<BudgetDbContext>();
+    public class BudgetDbContextDesignTimeFactory : IDesignTimeDbContextFactory<BudgetDbContext>
+    {
+        public BudgetDbContext CreateDbContext(string[] args)
+        {
+            var builder = new DbContextOptionsBuilder<BudgetDbContext>();
 
-    //        builder.UseSqlServer("x");
+            builder.UseSqlServer("x");
 
-    //        return new BudgetDbContext(builder.Options);
-    //    }
-    //}
+            return new BudgetDbContext(builder.Options);
+        }
+    }
 }

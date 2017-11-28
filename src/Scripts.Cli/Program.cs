@@ -13,21 +13,21 @@ namespace Scripts.Cli
             // 1-2. Initialize DbContext and apply migration to verify it's working
             //---------------------------------------------------------------------
 
-            //string connectionString =
-            //    "Server=localhost; Initial Catalog=SpecFlowEFCore2.Cli; Trusted_Connection=true; MultipleActiveResultSets=true;";
+            string connectionString =
+                "Server=localhost; Initial Catalog=SpecFlowEFCore2.Cli; Trusted_Connection=true; MultipleActiveResultSets=true;";
 
-            //var optionsBuilder = new DbContextOptionsBuilder<BudgetDbContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<BudgetDbContext>();
 
-            //optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseSqlServer(connectionString);
 
-            //Console.WriteLine("Creating database / applying migrations...");
+            Console.WriteLine("Creating database / applying migrations...");
 
-            //using (var dbContext = new BudgetDbContext(optionsBuilder.Options))
-            //{
-            //    dbContext.Database.Migrate();
-            //}
+            using (var dbContext = new BudgetDbContext(optionsBuilder.Options))
+            {
+                dbContext.Database.Migrate();
+            }
 
-            //Console.WriteLine("Done!");
+            Console.WriteLine("Done!");
         }
     }
 }
