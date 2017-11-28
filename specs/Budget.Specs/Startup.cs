@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Budget.Setup;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -27,6 +28,11 @@ namespace Budget.Specs
 
         public IContainer Container { get; private set; }
 
+        // 2-1. Include BudgetDbSetup helper
+        //----------------------------------
+
+        public BudgetDbSetup DbSetup { get; private set; }
+
         public IConfigurationRoot Options { get; }
 
         public static Startup Create()
@@ -44,7 +50,24 @@ namespace Budget.Specs
 
         private void ConfigureContainer(ContainerBuilder builder)
         {
-            // TODO: Configure Autofac container
+            // 2-2. Configure Autofac module
+            //------------------------------
+
+            builder.RegisterModule(new BudgetContainerSetup(DbSetup));
+        }
+
+        // 2-3. Create database / apply migrations
+        //----------------------------------------
+
+        private BudgetDbSetup ConfigureDabatase()
+        {
+            string connectionString = Options["ConnectionStrings:DefaultConnection"];
+
+            var dbSetup = new BudgetDbSetup(connectionString);
+
+            dbSetup.ConfigureDatabase(migrateDatabase: true);
+
+            return dbSetup;
         }
 
         private IConfigurationRoot ConfigureOptions()
@@ -62,6 +85,11 @@ namespace Budget.Specs
 
         private void ConfigureServices(IServiceCollection services)
         {
+            // 2-4. Configure database service
+            //--------------------------------
+
+            DbSetup = ConfigureDabatase();
+
             var builder = new ContainerBuilder();
 
             builder.Populate(services);
