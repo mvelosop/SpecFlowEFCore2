@@ -29,39 +29,39 @@ namespace Budget.Specs.Bindings
         // 3-2. Get budget classes step
         //-----------------------------
 
-        //[Then(@"I get the following budget classes")]
-        //public async Task ThenIGetTheFollowingBudgetClasses(Table table)
-        //{
-        //    using (var scope = GetScope())
-        //    {
-        //        var services = scope.Resolve<BudgetClassServices>();
+        [Then(@"I get the following budget classes")]
+        public async Task ThenIGetTheFollowingBudgetClasses(Table table)
+        {
+            using (var scope = GetScope())
+            {
+                var services = scope.Resolve<BudgetClassServices>();
 
-        //        List<BudgetClass> result = await services.QueryBudgetClasses().ToListAsync();
+                List<BudgetClass> result = await services.QueryBudgetClasses().ToListAsync();
 
-        //        table.CompareToSet(result);
-        //    }
-        //}
+                table.CompareToSet(result);
+            }
+        }
 
         // 3-3. Add budget classes step
         //-----------------------------
 
-        //[When(@"I add budget classes:")]
-        //public async Task WhenIAddBudgetClasses(Table table)
-        //{
-        //    var dataSet = table.CreateSet<BudgetClass>();
+        [When(@"I add budget classes:")]
+        public async Task WhenIAddBudgetClasses(Table table)
+        {
+            var dataSet = table.CreateSet<BudgetClass>();
 
-        //    using (var scope = GetScope())
-        //    {
-        //        var services = scope.Resolve<BudgetClassServices>();
+            using (var scope = GetScope())
+            {
+                var services = scope.Resolve<BudgetClassServices>();
 
-        //        foreach (BudgetClass bc in dataSet)
-        //        {
-        //            var errors = await services.AddBudgetClassAsync(bc);
+                foreach (BudgetClass bc in dataSet)
+                {
+                    var errors = await services.AddBudgetClassAsync(bc);
 
-        //            errors.Should().BeEmpty();
-        //        }
-        //    }
-        //}
+                    errors.Should().BeEmpty();
+                }
+            }
+        }
 
         private IContainer GetContainer()
         {

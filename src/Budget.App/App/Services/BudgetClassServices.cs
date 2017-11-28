@@ -18,39 +18,39 @@ namespace Budget.App.Services
 
     public class BudgetClassServices
     {
-        //private readonly Lazy<BudgetClassRepository> _lazyBudgetClassRepo;
+        private readonly Lazy<BudgetClassRepository> _lazyBudgetClassRepo;
 
-        //public BudgetClassServices(
-        //    Lazy<BudgetClassRepository> lazyBudgetClassRepo)
-        //{
-        //    _lazyBudgetClassRepo = lazyBudgetClassRepo;
-        //}
+        public BudgetClassServices(
+            Lazy<BudgetClassRepository> lazyBudgetClassRepo)
+        {
+            _lazyBudgetClassRepo = lazyBudgetClassRepo;
+        }
 
-        //private BudgetClassRepository BudgetClassRepo => _lazyBudgetClassRepo.Value;
+        private BudgetClassRepository BudgetClassRepo => _lazyBudgetClassRepo.Value;
 
-        //public async Task<List<ValidationResult>> AddBudgetClassAsync(BudgetClass entity)
-        //{
-        //    // 3-4. Save to repo
-        //    //------------------
+        public async Task<List<ValidationResult>> AddBudgetClassAsync(BudgetClass entity)
+        {
+            // 3-4. Save to repo
+            //------------------
 
-        //    //List<ValidationResult> errors = await BudgetClassRepo.TryInsertAsync(entity);
+            //List<ValidationResult> errors = await BudgetClassRepo.TryInsertAsync(entity);
 
-        //    //if (errors.Any()) return errors;
+            //if (errors.Any()) return errors;
 
-        //    //await BudgetClassRepo.SaveChangesAsync();
+            //await BudgetClassRepo.SaveChangesAsync();
 
-        //    return Errors.NoError;
-        //}
+            return Errors.NoError;
+        }
 
-        //public IQueryable<BudgetClass> QueryBudgetClasses(Expression<Func<BudgetClass, bool>> where = null)
-        //{
-        //    // 3-5. Get data from repo
-        //    //------------------------
+        public IQueryable<BudgetClass> QueryBudgetClasses(Expression<Func<BudgetClass, bool>> where = null)
+        {
+            // 3-5. Get data from repo
+            //------------------------
 
-        //    //return BudgetClassRepo.Query(where);
+            //return BudgetClassRepo.Query(where);
 
-        //    return Enumerable.Empty<BudgetClass>().AsAsyncQueryable();
-        //}
+            return Enumerable.Empty<BudgetClass>().AsAsyncQueryable();
+        }
     }
 
 }
