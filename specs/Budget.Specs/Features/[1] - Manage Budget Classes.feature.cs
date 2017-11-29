@@ -169,6 +169,81 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
+        [Xunit.FactAttribute(DisplayName="Scenario - 1.3 - Update budget classes")]
+        [Xunit.TraitAttribute("FeatureTitle", "Feature - 1 - ManageBudgetClasses")]
+        [Xunit.TraitAttribute("Description", "Scenario - 1.3 - Update budget classes")]
+        public virtual void Scenario_1_3_UpdateBudgetClasses()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Scenario - 1.3 - Update budget classes", ((string[])(null)));
+#line 42
+this.ScenarioSetup(scenarioInfo);
+#line 6
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Name",
+                        "SortOrder",
+                        "TransactionType"});
+            table3.AddRow(new string[] {
+                        "Income",
+                        "1",
+                        "Income"});
+            table3.AddRow(new string[] {
+                        "Housing",
+                        "2",
+                        "Expense"});
+            table3.AddRow(new string[] {
+                        "Food",
+                        "3",
+                        "Expense"});
+#line 44
+    testRunner.Given("I have added these budget classes:", ((string)(null)), table3, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "BudgetClass",
+                        "Name",
+                        "SortOrder",
+                        "TransactionType"});
+            table4.AddRow(new string[] {
+                        "Income",
+                        "Income - Name updated",
+                        "1",
+                        "Income"});
+            table4.AddRow(new string[] {
+                        "Housing",
+                        "Housing - Type updated",
+                        "2",
+                        "Loan"});
+            table4.AddRow(new string[] {
+                        "Food",
+                        "Food - Sort update",
+                        "4",
+                        "Expense"});
+#line 50
+    testRunner.When("I update the budget classes to this:", ((string)(null)), table4, "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Name",
+                        "SortOrder",
+                        "TransactionType"});
+            table5.AddRow(new string[] {
+                        "Income - Name updated",
+                        "1",
+                        "Income"});
+            table5.AddRow(new string[] {
+                        "Housing - Type updated",
+                        "2",
+                        "Loan"});
+            table5.AddRow(new string[] {
+                        "Food - Sort update",
+                        "4",
+                        "Expense"});
+#line 56
+    testRunner.Then("I get the following budget classes", ((string)(null)), table5, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
         [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.2.0.0")]
         [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
         public class FixtureData : System.IDisposable

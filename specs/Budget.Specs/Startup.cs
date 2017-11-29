@@ -30,7 +30,6 @@ namespace Budget.Specs
 
         // 2-1. Include BudgetDbSetup helper
         //----------------------------------
-
         public BudgetDbSetup DbSetup { get; private set; }
 
         public IConfigurationRoot Options { get; }
@@ -52,13 +51,16 @@ namespace Budget.Specs
         {
             // 2-2. Configure Autofac module
             //------------------------------
-
             builder.RegisterModule(new BudgetContainerSetup(DbSetup));
+
+            // 11-7. Register Mapper types
+            //----------------------------
+            builder.RegisterAssemblyTypes(GetType().Assembly)
+                .Where(t => t.Name.EndsWith("Mapper"));
         }
 
         // 2-3. Create database / apply migrations
         //----------------------------------------
-
         private BudgetDbSetup ConfigureDabatase()
         {
             string connectionString = Options["ConnectionStrings:DefaultConnection"];
@@ -87,7 +89,6 @@ namespace Budget.Specs
         {
             // 2-4. Configure database service
             //--------------------------------
-
             DbSetup = ConfigureDabatase();
 
             var builder = new ContainerBuilder();

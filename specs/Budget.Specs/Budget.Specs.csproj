@@ -186,6 +186,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>[3] - Handle Multi-Tenancy.feature</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BudgetClassData.cs" />
+    <Compile Include="Helpers\BudgetClassMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -215,6 +217,10 @@
     <ProjectReference Include="..\..\lib\Domion.Testing\Domion.Testing.csproj">
       <Project>{4cc2a77b-95b6-4a93-adbb-8f0456d14cc7}</Project>
       <Name>Domion.Testing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib\Domion\Domion.csproj">
+      <Project>{f615651a-b6ec-432e-8068-f3792847ac86}</Project>
+      <Name>Domion</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Budget.App\Budget.App.csproj">
       <Project>{34a925b3-07b7-4311-96db-1e6b09543aa9}</Project>
