@@ -63,5 +63,18 @@ namespace Budget.App.Services
 
             return Errors.NoError;
         }
+
+        // 12-1. Implement BudgetClass remove
+        //-----------------------------------
+        public async Task<List<ValidationResult>> RemoveBudgetClassAsync(BudgetClass entity)
+        {
+            List<ValidationResult> errors = await BudgetClassRepo.TryDeleteAsync(entity);
+
+            if (errors.Any()) return errors;
+
+            await BudgetClassRepo.SaveChangesAsync();
+
+            return Errors.NoError;
+        }
     }
 }

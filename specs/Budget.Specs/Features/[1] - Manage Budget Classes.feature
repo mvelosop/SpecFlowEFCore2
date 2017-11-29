@@ -58,3 +58,19 @@ Scenario: Scenario - 1.3 - Update budget classes
         | Income - Name updated  | 1         | Income          |
         | Housing - Type updated | 2         | Loan            |
         | Food - Sort update     | 4         | Expense         |
+
+
+Scenario: Scenario - 1.4 - Delete budget class
+
+    Given I have added these budget classes:
+        | Name    | SortOrder | TransactionType |
+        | Income  | 1         | Income          |
+        | Housing | 2         | Expense         |
+        | Food    | 3         | Expense         |
+
+    When I delete budget class "Housing"
+
+    Then I get the following budget classes
+        | Name    | SortOrder | TransactionType |
+        | Income  | 1         | Income          |
+        | Food    | 3         | Expense         |

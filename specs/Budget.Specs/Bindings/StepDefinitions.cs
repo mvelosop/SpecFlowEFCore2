@@ -1,17 +1,17 @@
 ﻿using Autofac;
+using Budget.App;
 using Budget.App.Services;
 using Budget.Core.Model;
 using Budget.Data.Services;
+using Budget.Specs.Helpers;
 using Domion.Testing.Assertions;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using Budget.App;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
-using System.Linq;
-using Budget.Specs.Helpers;
 
 namespace Budget.Specs.Bindings
 {
@@ -23,6 +23,7 @@ namespace Budget.Specs.Bindings
         // 10-1. Inject FeatureContext
         //----------------------------
         private readonly FeatureContext _featureContext;
+
         private readonly ScenarioContext _scenarioContext;
 
         public StepDefinitions(
@@ -31,32 +32,6 @@ namespace Budget.Specs.Bindings
         {
             _featureContext = featureContext;
             _scenarioContext = scenarioContext;
-        }
-
-        // 9-2. Create Scenario tenant context
-        //------------------------------------
-        [Given(@"I'm working in a new scenario tenant context")]
-        public async Task GivenImWorkingInANewScenarioTenantContext()
-        {
-            // Get scenario name
-            var scenarioName = _scenarioContext.ScenarioInfo.Title;
-
-            var sessionContext = await GetSessionContext(scenarioName);
-
-            _scenarioContext.Set(sessionContext, nameof(SessionContext));
-        }
-
-        // 4-1. Clear data step
-        //---------------------
-        [Given(@"there are no BudgetClasses")]
-        public async Task GivenThereAreNoBudgetClasses()
-        {
-            // 4-5. Refactor dependency resolution
-            //------------------------------------
-            var dbContext = Resolve<BudgetDbContext>();
-
-            dbContext.RemoveRange(await dbContext.BudgetClasses.ToListAsync());
-            await dbContext.SaveChangesAsync();
         }
 
         // 7-3. Add budget classes to tenant step
@@ -84,6 +59,32 @@ namespace Budget.Specs.Bindings
                     errors.Should().BeEmpty();
                 }
             }
+        }
+
+        // 9-2. Create Scenario tenant context
+        //------------------------------------
+        [Given(@"I'm working in a new scenario tenant context")]
+        public async Task GivenImWorkingInANewScenarioTenantContext()
+        {
+            // Get scenario name
+            var scenarioName = _scenarioContext.ScenarioInfo.Title;
+
+            var sessionContext = await GetSessionContext(scenarioName);
+
+            _scenarioContext.Set(sessionContext, nameof(SessionContext));
+        }
+
+        // 4-1. Clear data step
+        //---------------------
+        [Given(@"there are no BudgetClasses")]
+        public async Task GivenThereAreNoBudgetClasses()
+        {
+            // 4-5. Refactor dependency resolution
+            //------------------------------------
+            var dbContext = Resolve<BudgetDbContext>();
+
+            dbContext.RemoveRange(await dbContext.BudgetClasses.ToListAsync());
+            await dbContext.SaveChangesAsync();
         }
 
         // 5-2. Verify duplicate name step
@@ -156,6 +157,22 @@ namespace Budget.Specs.Bindings
             }
         }
 
+        // 12-2. Add delete step
+        //----------------------
+        [When(@"I delete budget class ""(.*)""")]
+        public async Task WhenIDeleteBudgetClass(string name)
+        {
+            var services = Resolve<BudgetClassServices>();
+
+            var entity = await services.FindBudgetClassByNameAsync(name);
+
+            entity.Should().NotBeNull($@"because BudgetClass ""{name}"" MUST exist!");
+
+            var errors = await services.RemoveBudgetClassAsync(entity);
+
+            errors.Should().BeEmpty();
+        }
+
         // 11-6. Add update step
         //----------------------
         [When(@"I update the budget classes to this:")]
@@ -220,7 +237,6 @@ namespace Budget.Specs.Bindings
                 var errors = await services.AddTenantAsync(tenant);
 
                 errors.Should().BeEmpty();
-
             }
 
             return new SessionContext(tenant);
